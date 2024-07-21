@@ -1,2 +1,0 @@
-insert into halls(name, row_count, place_count, description) values('Первый зал', 3, 30, 'Первый зал, в котором крутят мелодрамы, комедии, фантастику');
-insert into halls(name, row_count, place_count, description) values('Второй зал', 3, 30, 'Второй зал, в котором крутят ужасы, боевики, нуар');
