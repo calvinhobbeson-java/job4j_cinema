@@ -1,6 +1,8 @@
 package ru.job4j.cinema.service;
 
 import org.springframework.stereotype.Service;
+import ru.job4j.cinema.dto.FileDto;
+import ru.job4j.cinema.dto.FilmDto;
 import ru.job4j.cinema.model.Film;
 import ru.job4j.cinema.repository.FilmRepository;
 
@@ -17,8 +19,8 @@ public class SimpleFilmService implements FilmService {
     }
 
     @Override
-    public Optional<Film> findById(int id) {
-        return filmRepository.findById(id);
+    public Optional<Film> findById(int id, FileDto image) {
+        return filmRepository.findById(id, image);
     }
 
     @Override

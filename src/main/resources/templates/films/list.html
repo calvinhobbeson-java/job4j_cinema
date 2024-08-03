@@ -27,13 +27,24 @@
                     <thead>
                     <tr>
                         <th scope="col">#</th>
+                        <th scope="col"></th>
                         <th scope="col">Название</th>
+                        <th scope="col">Описание</th>
+                        <th scope="col">Год выхода</th>
+                        <th scope="col">Ограничение по возрасту</th>
+                        <th scope="col">Длительность</th>
+                        <th scope="col">Жанр</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="film: ${films}">
-                        <td th:text="${film.id}"/>
-                        <td th:text="${film.name}"/>
+                        <td th:text="${filmDto.id}"/>
+                        <td th:text="${filmDto.name}"/>
+                        <td th:text="${filmDto.description}"/>
+                        <td th:text="${filmDto.year}"/>
+                        <td th:text="${filmDto.minimalAge}"/>
+                        <td th:text="${filmDto.durationInMinutes}"/>
+                        <td th:text="${filmDto.genre}"/>
                     </tr>
                     </tbody>
                 </table>
