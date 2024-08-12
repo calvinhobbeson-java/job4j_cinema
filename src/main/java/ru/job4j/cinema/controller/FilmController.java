@@ -25,8 +25,8 @@ public class FilmController {
     }
 
     @GetMapping("/{id}")
-    public String getById(Model model, @PathVariable int id, FileDto image) {
-        var filmOptional = filmService.findById(id, image);
+    public String getById(Model model, @PathVariable int id) {
+        var filmOptional = filmService.findById(id);
         if (filmOptional.isEmpty()) {
             model.addAttribute("message", "Фильм не найден");
             return "errors/404";

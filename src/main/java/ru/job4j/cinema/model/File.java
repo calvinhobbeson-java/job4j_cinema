@@ -13,6 +13,9 @@ public class File {
         this.path = path;
     }
 
+    public File() {
+    }
+
     public int getId() {
         return id;
     }

@@ -9,7 +9,7 @@ import java.util.Collection;
 
 public interface FilmRepository {
 
-    Optional<Film> findById(int id, FileDto image);
+    Optional<Film> findById(int id);
 
     Collection<Film> findAll();
 }
