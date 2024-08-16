@@ -31,6 +31,9 @@ public class FilmSession {
         this.price = price;
     }
 
+    public FilmSession() {
+    }
+
 
     public int getId() {
         return id;
