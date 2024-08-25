@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class User {
 
-    private static final Map<String, String> COLUMN_MAPPING = Map.of(
+    public static final Map<String, String> COLUMN_MAPPING = Map.of(
             "id", "id",
             "full_name", "fullName",
             "email", "email",
@@ -24,6 +24,8 @@ public class User {
         this.password = password;
     }
 
+    public User() {
+    }
 
     public int getId() {
         return id;
@@ -33,12 +35,12 @@ public class User {
         this.id = id;
     }
 
-    public String getFullName() {
+    public String getName() {
         return fullName;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setName(String name) {
+        this.fullName = name;
     }
 
     public String getEmail() {

@@ -26,7 +26,6 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th scope="col">ID</th>
                         <th scope="col">Название</th>
                         <th scope="col">Зал</th>
                         <th scope="col">Начало</th>
@@ -35,13 +34,12 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="filmSession: ${sessions}">
-                        <td th:text="${filmSession.id}"/>
-                        <td th:text="${filmSession.filmId}"/>
-                        <td th:text="${filmSession.hallsId}"/>
-                        <td th:text="${filmSession.startTime}"/>
-                        <td th:text="${filmSession.endTime}"/>
-                        <td th:text="${filmSession.price}"/>
+                    <tr th:each="filmSessionDto: ${sessions}">
+                        <td th:text="${filmSessionDto.filmName}"/>
+                        <td th:text="${filmSessionDto.hallsId}"/>
+                        <td th:text="${filmSessionDto.startTime}"/>
+                        <td th:text="${filmSessionDto.endTime}"/>
+                        <td th:text="${filmSessionDto.price}"/>
                     </tr>
                     </tbody>
                 </table>
