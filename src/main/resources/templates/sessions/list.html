@@ -19,7 +19,6 @@
 </head>
 <body>
 <div class="container-fluid p-0">
-    <div class="container-fluid p-0">
         <header th:insert="blocks/header :: header"></header>
         <div class="container">
             <div class="row">
@@ -35,7 +34,9 @@
                     </thead>
                     <tbody>
                     <tr th:each="filmSessionDto: ${sessions}">
-                        <td th:text="${filmSessionDto.filmName}"/>
+                        <td>
+                            <a th:href="@{/tickets/create(filmSessionId=${filmSessionDto.id})}" th:text="${filmSessionDto.filmName}"></a>
+                        </td>
                         <td th:text="${filmSessionDto.hallsId}"/>
                         <td th:text="${filmSessionDto.startTime}"/>
                         <td th:text="${filmSessionDto.endTime}"/>

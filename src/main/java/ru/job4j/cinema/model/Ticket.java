@@ -27,6 +27,9 @@ public class Ticket {
         this.userId = userId;
     }
 
+    public Ticket() {
+    }
+
 
     public int getId() {
         return id;
