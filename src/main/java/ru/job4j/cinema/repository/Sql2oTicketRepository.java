@@ -17,7 +17,7 @@ public class Sql2oTicketRepository implements TicketRepository {
 
     @Override
     public Optional<Ticket> create(Ticket ticket) {
-        try (var connection  = sql2o.open()) {
+        try (var connection = sql2o.open()) {
             var sql = "INSERT INTO tickets(sessionId, rowNumber, placeNumber, userId) VALUES (:sessionId, :rowNumber, :placeNumber, :userId)";
             var query = connection.createQuery(sql, true)
                     .addParameter("sessionId", ticket.getSessionId())
@@ -31,7 +31,7 @@ public class Sql2oTicketRepository implements TicketRepository {
     }
 
     @Override
-    public boolean isSeatTaken(int sessionId, int rowNumber,int seatNumber) {
+    public boolean isSeatTaken(int sessionId, int rowNumber, int seatNumber) {
         try (var connection = sql2o.open()) {
             var sql = "SELECT * FROM tickets WHERE sessionId = sessionId, rowNumber = rowNumber, seatNumber = seatNumber";
             var query = connection.createQuery(sql);

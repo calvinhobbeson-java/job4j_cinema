@@ -10,7 +10,7 @@ import java.util.Optional;
 @Service
 public class SimpleTicketService implements TicketService {
 
-private final TicketRepository ticketRepository;
+    private final TicketRepository ticketRepository;
 
     public SimpleTicketService(TicketRepository ticketRepository) {
         this.ticketRepository = ticketRepository;

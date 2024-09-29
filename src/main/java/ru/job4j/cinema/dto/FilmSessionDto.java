@@ -6,12 +6,12 @@ import java.util.Map;
 public class FilmSessionDto {
 
     public static final Map<String, String> COLUMN_MAPPING = Map.of(
-            "id","id",
-            "filmName","filmName",
-            "halls_id","hallsId",
-            "start_time","startTime",
-            "end_time","endTime",
-            "price","price"
+            "id", "id",
+            "filmName", "filmName",
+            "halls_id", "hallsId",
+            "start_time", "startTime",
+            "end_time", "endTime",
+            "price", "price"
     );
 
     private int id;

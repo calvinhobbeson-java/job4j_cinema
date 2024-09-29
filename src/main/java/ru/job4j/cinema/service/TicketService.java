@@ -9,5 +9,5 @@ public interface TicketService {
 
     Optional<Ticket> create(Ticket ticket, HttpSession session);
 
-    boolean isSeatTaken(int sessionId, int rowNumber,int seatNumber);
+    boolean isSeatTaken(int sessionId, int rowNumber, int seatNumber);
 }

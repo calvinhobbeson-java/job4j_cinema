@@ -33,7 +33,7 @@ public class TicketController {
     }
 
     @PostMapping("/create")
-    public String create(@ModelAttribute Ticket ticket, @RequestParam int sessionId, @RequestParam int rowNumber, @RequestParam int seatNumber,  Model model, HttpSession session) {
+    public String create(@ModelAttribute Ticket ticket, @RequestParam int sessionId, @RequestParam int rowNumber, @RequestParam int seatNumber, Model model, HttpSession session) {
         if (ticketService.isSeatTaken(sessionId, rowNumber, seatNumber)) {
             return "tickets/fail";
         }
