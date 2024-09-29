@@ -26,8 +26,8 @@ public class TicketController {
     }
 
     @GetMapping("/create")
-    public String getCreationPage(@RequestParam("id") int id, Model model) {
-        Optional<FilmSessionDto> filmSessionDto = filmSessionService.findById(id);
+    public String getCreationPage(@RequestParam("filmSessionId") int filmSessionId, Model model) {
+        Optional<FilmSessionDto> filmSessionDto = filmSessionService.findById(filmSessionId);
         model.addAttribute("filmSessionDto", filmSessionDto);
         return "tickets/create";
     }

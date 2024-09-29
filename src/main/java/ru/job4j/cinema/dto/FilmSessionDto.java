@@ -30,6 +30,9 @@ public class FilmSessionDto {
         this.price = price;
     }
 
+    public FilmSessionDto() {
+    }
+
     public int getId() {
         return id;
     }
