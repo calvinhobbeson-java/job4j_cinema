@@ -32,8 +32,9 @@ public class SimpleFilmSessionService implements FilmSessionService {
     }
 
     @Override
-    public Optional<FilmSessionDto> findById(int id) {
-        return filmSessionRepository.findById(id);
+    public FilmSessionDto findById(int id) {
+        FilmSession filmSession =  filmSessionRepository.findById(id).get();
+        return filmSessionToDto(filmSession).get();
     }
 
     public Optional<FilmSessionDto> filmSessionToDto(FilmSession filmsession) {
