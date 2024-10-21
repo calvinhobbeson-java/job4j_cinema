@@ -5,7 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.job4j.cinema.dto.FilmSessionDto;
+import ru.job4j.cinema.dto.IsSeatTakenDto;
 import ru.job4j.cinema.model.Ticket;
+import ru.job4j.cinema.model.User;
 import ru.job4j.cinema.service.FilmSessionService;
 import ru.job4j.cinema.service.TicketService;
 
@@ -32,13 +34,10 @@ public class TicketController {
     }
 
     @PostMapping("/create")
-    public String create(@ModelAttribute Ticket ticket, @RequestParam int sessionId, @RequestParam int row, @RequestParam int seat, Model model, HttpSession session) {
-        if (ticketService.isSeatTaken(sessionId, row, seat)) {
-            return "tickets/fail";
-        }
+    public String create(@ModelAttribute IsSeatTakenDto isSeatTakenDto, @ModelAttribute Ticket ticket, Model model, HttpSession session) {
         try {
-            ticketService.create(ticket, session);
-            return "redirect:/tickets/success";
+            ticketService.create(isSeatTakenDto, ticket, session);
+            return "tickets/success";
         } catch (Exception exception) {
             model.addAttribute("message", exception.getMessage());
             return "tickets/fail";

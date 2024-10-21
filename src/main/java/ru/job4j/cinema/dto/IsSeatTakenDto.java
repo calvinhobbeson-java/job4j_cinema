@@ -1,8 +1,9 @@
-package ru.job4j.cinema.model;
+package ru.job4j.cinema.dto;
 
 import java.util.Map;
+import java.util.Objects;
 
-public class Ticket {
+public class IsSeatTakenDto {
 
     public static final Map<String, String> COLUMN_MAPPING = Map.of(
             "id", "id",
@@ -18,18 +19,16 @@ public class Ticket {
     private int placeNumber;
     private int userId;
 
+    public IsSeatTakenDto() {
+    }
 
-    public Ticket(int id, int sessionId, int rowNumber, int placeNumber, int userId) {
+    public IsSeatTakenDto(int id, int sessionId, int rowNumber, int placeNumber, int userId) {
         this.id = id;
         this.sessionId = sessionId;
         this.rowNumber = rowNumber;
         this.placeNumber = placeNumber;
         this.userId = userId;
     }
-
-    public Ticket() {
-    }
-
 
     public int getId() {
         return id;
@@ -69,5 +68,18 @@ public class Ticket {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        IsSeatTakenDto that = (IsSeatTakenDto) o;
+        return sessionId == that.sessionId && rowNumber == that.rowNumber && placeNumber == that.placeNumber && userId == that.userId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(sessionId, rowNumber, placeNumber, userId);
     }
 }

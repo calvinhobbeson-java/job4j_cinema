@@ -2,8 +2,10 @@ package ru.job4j.cinema.repository;
 
 import org.springframework.stereotype.Repository;
 import org.sql2o.Sql2o;
+import ru.job4j.cinema.dto.IsSeatTakenDto;
 import ru.job4j.cinema.model.Ticket;
 
+import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 @Repository
@@ -15,15 +17,19 @@ public class Sql2oTicketRepository implements TicketRepository {
         this.sql2o = sql2o;
     }
 
+
     @Override
-    public Optional<Ticket> create(Ticket ticket) {
+    public Optional<Ticket> create(IsSeatTakenDto isSeatTakenDto, Ticket ticket, HttpSession session) {
+        if (isSeatTaken(isSeatTakenDto)) {
+            return Optional.empty();
+        }
         try (var connection = sql2o.open()) {
-            var sql = "INSERT INTO tickets(sessionId, rowNumber, placeNumber, userId) VALUES (:sessionId, :rowNumber, :placeNumber, :userId)";
+            var sql = "INSERT INTO tickets(session_id, row_number, place_number, user_id) VALUES (:sessionId, :rowNumber, :placeNumber, :userId)";
             var query = connection.createQuery(sql, true)
                     .addParameter("sessionId", ticket.getSessionId())
                     .addParameter("rowNumber", ticket.getRowNumber())
                     .addParameter("placeNumber", ticket.getPlaceNumber())
-                    .addParameter("userId", ticket.getUserId());
+                    .addParameter("userId", session.getAttribute("id"));
             int generatedId = query.executeUpdate().getKey(Integer.class);
             ticket.setId(generatedId);
         }
@@ -31,14 +37,14 @@ public class Sql2oTicketRepository implements TicketRepository {
     }
 
     @Override
-    public boolean isSeatTaken(int sessionId, int rowNumber, int seatNumber) {
+    public boolean isSeatTaken(IsSeatTakenDto isSeatTakenDto) {
         try (var connection = sql2o.open()) {
-            var sql = "SELECT * FROM tickets WHERE sessionId = sessionId, rowNumber = rowNumber, seatNumber = seatNumber";
+            var sql = "SELECT * FROM tickets WHERE session_id = :sessionId AND row_number = :rowNumber AND place_number = :placeNumber";
             var query = connection.createQuery(sql);
-            query.addParameter("sessionId", sessionId);
-            query.addParameter("rowNumber", rowNumber);
-            query.addParameter("seatNumber", seatNumber);
-            Ticket ticket = query.executeAndFetchFirst(Ticket.class);
+            query.addParameter("sessionId", isSeatTakenDto.getSessionId());
+            query.addParameter("rowNumber", isSeatTakenDto.getRowNumber());
+            query.addParameter("placeNumber", isSeatTakenDto.getPlaceNumber());
+            Ticket ticket = query.setColumnMappings(Ticket.COLUMN_MAPPING).executeAndFetchFirst(Ticket.class);
             return ticket != null;
         }
     }

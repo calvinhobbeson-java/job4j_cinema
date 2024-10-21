@@ -1,7 +1,9 @@
 package ru.job4j.cinema.service;
 
 import org.springframework.stereotype.Service;
+import ru.job4j.cinema.dto.IsSeatTakenDto;
 import ru.job4j.cinema.model.Ticket;
+import ru.job4j.cinema.model.User;
 import ru.job4j.cinema.repository.TicketRepository;
 
 import javax.servlet.http.HttpSession;
@@ -17,14 +19,12 @@ public class SimpleTicketService implements TicketService {
     }
 
     @Override
-    public Optional<Ticket> create(Ticket ticket, HttpSession session) {
-        int userId = Integer.parseInt((String) session.getAttribute("id"));
-        ticket.setId(userId);
-        return ticketRepository.create(ticket);
+    public Optional<Ticket> create(IsSeatTakenDto isSeatTakenDto, Ticket ticket, HttpSession session) {
+        return ticketRepository.create(isSeatTakenDto, ticket,session);
     }
 
     @Override
-    public boolean isSeatTaken(int sessionId, int rowNumber, int seatNumber) {
-        return ticketRepository.isSeatTaken(sessionId, rowNumber, seatNumber);
+    public boolean isSeatTaken(IsSeatTakenDto isSeatTakenDto) {
+        return ticketRepository.isSeatTaken(isSeatTakenDto);
     }
 }

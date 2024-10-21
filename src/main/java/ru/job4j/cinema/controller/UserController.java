@@ -35,7 +35,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String register(Model model, @ModelAttribute User user, HttpSession session) {
+    public String register(Model model, @ModelAttribute User user) {
         var savedUser = userService.save(user);
         if (savedUser.isEmpty()) {
             model.addAttribute("message", "Пользователь с такой почтой уже существует");
