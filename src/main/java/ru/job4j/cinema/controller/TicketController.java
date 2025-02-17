@@ -36,10 +36,11 @@ public class TicketController {
     @PostMapping("/create")
     public String create(@ModelAttribute IsSeatTakenDto isSeatTakenDto, @ModelAttribute Ticket ticket, Model model, HttpSession session) {
         try {
-            ticketService.create(isSeatTakenDto, ticket, session);
+            var user = (User) session.getAttribute("user");
+            ticketService.create(isSeatTakenDto, ticket, user);
             return "tickets/success";
-        } catch (Exception exception) {
-            model.addAttribute("message", exception.getMessage());
+        } catch (Exception e) {
+            model.addAttribute("message", e.getMessage());
             return "tickets/fail";
         }
     }

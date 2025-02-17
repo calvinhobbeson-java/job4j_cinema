@@ -19,8 +19,12 @@ public class SimpleTicketService implements TicketService {
     }
 
     @Override
-    public Optional<Ticket> create(IsSeatTakenDto isSeatTakenDto, Ticket ticket, HttpSession session) {
-        return ticketRepository.create(isSeatTakenDto, ticket,session);
+    public Optional<Ticket> create(IsSeatTakenDto isSeatTakenDto, Ticket ticket, User user) {
+        if (isSeatTaken(isSeatTakenDto)) {
+            throw new IllegalArgumentException();
+        } else {
+            return ticketRepository.create(isSeatTakenDto, ticket, user);
+        }
     }
 
     @Override

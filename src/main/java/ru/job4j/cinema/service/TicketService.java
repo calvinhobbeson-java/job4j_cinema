@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface TicketService {
 
-    Optional<Ticket> create(IsSeatTakenDto isSeatTakenDto, Ticket ticket, HttpSession session);
+    Optional<Ticket> create(IsSeatTakenDto isSeatTakenDto, Ticket ticket, User user);
 
     boolean isSeatTaken(IsSeatTakenDto isSeatTakenDto);
 }

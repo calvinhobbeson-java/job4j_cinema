@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 import org.sql2o.Sql2o;
 import ru.job4j.cinema.dto.IsSeatTakenDto;
 import ru.job4j.cinema.model.Ticket;
+import ru.job4j.cinema.model.User;
 
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
@@ -19,19 +20,18 @@ public class Sql2oTicketRepository implements TicketRepository {
 
 
     @Override
-    public Optional<Ticket> create(IsSeatTakenDto isSeatTakenDto, Ticket ticket, HttpSession session) {
-        if (isSeatTaken(isSeatTakenDto)) {
-            return Optional.empty();
-        }
+    public Optional<Ticket> create(IsSeatTakenDto isSeatTakenDto, Ticket ticket, User user) {
         try (var connection = sql2o.open()) {
             var sql = "INSERT INTO tickets(session_id, row_number, place_number, user_id) VALUES (:sessionId, :rowNumber, :placeNumber, :userId)";
             var query = connection.createQuery(sql, true)
                     .addParameter("sessionId", ticket.getSessionId())
                     .addParameter("rowNumber", ticket.getRowNumber())
                     .addParameter("placeNumber", ticket.getPlaceNumber())
-                    .addParameter("userId", session.getAttribute("id"));
+                    .addParameter("userId", user.getId());
             int generatedId = query.executeUpdate().getKey(Integer.class);
             ticket.setId(generatedId);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return Optional.of(ticket);
     }
