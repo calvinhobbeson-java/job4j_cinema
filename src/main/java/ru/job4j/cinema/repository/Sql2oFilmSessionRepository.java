@@ -34,5 +34,6 @@ public class Sql2oFilmSessionRepository implements FilmSessionRepository {
             var filmSession = query.setColumnMappings(FilmSession.COLUMN_MAPPING).executeAndFetchFirst(FilmSession.class);
             return Optional.ofNullable(filmSession);
         }
+
     }
 }

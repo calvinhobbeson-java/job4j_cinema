@@ -37,6 +37,9 @@ public class TicketController {
     public String create(@ModelAttribute IsSeatTakenDto isSeatTakenDto, @ModelAttribute Ticket ticket, Model model, HttpSession session) {
         try {
             var user = (User) session.getAttribute("user");
+            if (user == null) {
+                return "users/login";
+            }
             ticketService.create(isSeatTakenDto, ticket, user);
             return "tickets/success";
         } catch (Exception e) {
