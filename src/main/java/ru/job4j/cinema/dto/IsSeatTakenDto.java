@@ -72,8 +72,12 @@ public class IsSeatTakenDto {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         IsSeatTakenDto that = (IsSeatTakenDto) o;
         return sessionId == that.sessionId && rowNumber == that.rowNumber && placeNumber == that.placeNumber && userId == that.userId;
     }
